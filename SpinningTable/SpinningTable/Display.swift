@@ -2,27 +2,25 @@
 //  Display.swift
 //  SpinningTable
 //
-//  Created by Sally Ouyang on 2014-08-06.
+//  Created by Sally Ouyang on 2014-08-11.
 //  Copyright (c) 2014 Sally Ouyang. All rights reserved.
 //
 
 import SpriteKit
 import UIKit
-
-protocol DisplayData
+protocol ShowInfo
 {
-    func updateData()
+    func updateInfo()
     func levelUp()
     func gameOver()
     func replay()
 }
-
-class Display: SKNode ,DisplayData
+class Display: SKNode ,ShowInfo
 {
-    let scoreLabel = SKLabelNode(text: "SCORE \(Data.score)")
-    let levelLabel = SKLabelNode(text: "LEVEL \(Data.level)")
-    let lifeLabel = SKLabelNode(text: "LIFE \(Data.life)")
-    let bestScoreLabel = SKLabelNode(text: "BEST SCORE \(Data.bestScore)")
+    let scoreLabel = SKLabelNode(text: "SCORE \(Info.score)")
+    let levelLabel = SKLabelNode(text: "LEVEL \(Info.level)")
+    let lifeLabel = SKLabelNode(text: "LIFE \(Info.life)")
+    let bestScoreLabel = SKLabelNode(text: "BEST SCORE \(Info.bestScore)")
     let gameOverLabel = SKLabelNode(text: "GAME OVER")
     let share = Share()
     let replayDisplay = Replay()
@@ -40,20 +38,20 @@ class Display: SKNode ,DisplayData
     
     func setPosition()
     {
-        scoreLabel.position = CGPointMake(CGRectGetMidX(self.scene.frame), CGRectGetMaxY(self.scene.frame)/14)
+        scoreLabel.position = CGPointMake(CGRectGetMidX(self.scene.frame), CGRectGetMaxY(self.scene.frame)/9)
         bestScoreLabel.position = CGPointMake(CGRectGetMidX(self.scene.frame), CGRectGetMinY(self.scene.frame))
         levelLabel.position = CGPointMake(CGRectGetMidX(self.scene.frame), 4*CGRectGetMaxY(self.scene.frame)/5)
-        lifeLabel.position = CGPointMake(CGRectGetMidX(self.scene.frame), CGRectGetMaxY(self.scene.frame)/7)
+        lifeLabel.position = CGPointMake(CGRectGetMidX(self.scene.frame), CGRectGetMaxY(self.scene.frame)/5)
         gameOverLabel.position = CGPointMake(CGRectGetMidX(self.scene.frame), CGRectGetMidY(self.scene.frame))
         share.position = CGPointMake(CGRectGetMaxX(self.scene.frame)*3/4, CGRectGetMaxY(self.scene.frame)/3)
         replayDisplay.position = CGPointMake(CGRectGetMaxX(self.scene.frame)/4, CGRectGetMaxY(self.scene.frame)/3)
     }
     
-    func updateData()
+    func updateInfo()
     {
-        scoreLabel.text = "SCORE \(Data.score)"
-        levelLabel.text = "LEVEL \(Data.level)"
-        lifeLabel.text = "LIFE \(Data.life)"
+        scoreLabel.text = "SCORE \(Info.score)"
+        levelLabel.text = "LEVEL \(Info.level)"
+        lifeLabel.text = "LIFE \(Info.life)"
     }
     
     func levelUp()
@@ -70,7 +68,7 @@ class Display: SKNode ,DisplayData
         share.fontName = "Helvetica"
         replayDisplay.fontName = "Helvetica"
         bestScoreLabel.fontName = "Helvetica"
-        bestScoreLabel.text = "BEST SCORE \(Data.bestScore)"
+        bestScoreLabel.text = "BEST SCORE \(Info.bestScore)"
         self.addChild(gameOverLabel)
         self.addChild(share)
         self.addChild(replayDisplay)
@@ -87,4 +85,3 @@ class Display: SKNode ,DisplayData
         (self.scene as GameScene).restartGame()
     }
 }
-
