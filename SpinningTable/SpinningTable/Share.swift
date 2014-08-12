@@ -2,14 +2,15 @@
 //  Share.swift
 //  SpinningTable
 //
-//  Created by Sally Ouyang on 2014-08-06.
+//  Created by Sally Ouyang on 2014-08-11.
 //  Copyright (c) 2014 Sally Ouyang. All rights reserved.
 //
 
 import SpriteKit
 
 class Share: SKLabelNode {
-    init() {
+    init()
+    {
         super.init()
         self.userInteractionEnabled = true
         self.text = "SHARE"
@@ -18,7 +19,7 @@ class Share: SKLabelNode {
     override func touchesEnded(touches: NSSet!, withEvent event: UIEvent!)
     {
         let gameScene = nodeToImage(self.scene)
-        let message = "I scored \(Data.score) points in Spinning Table, join me and play!"
+        let message = "I scored \(Info.score) points in Spinning Table, join me and play!"
         let shareItems = [gameScene,message]
         let shareController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
         (scene.view.nextResponder() as UIViewController).presentViewController(shareController, animated: true, completion: nil)
@@ -45,3 +46,4 @@ class Share: SKLabelNode {
         return self.viewToImage(view)
     }
 }
+

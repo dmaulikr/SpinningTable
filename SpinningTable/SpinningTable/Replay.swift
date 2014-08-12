@@ -2,7 +2,7 @@
 //  Replay.swift
 //  SpinningTable
 //
-//  Created by Sally Ouyang on 2014-08-06.
+//  Created by Sally Ouyang on 2014-08-11.
 //  Copyright (c) 2014 Sally Ouyang. All rights reserved.
 //
 
@@ -15,6 +15,7 @@ class Replay: SKLabelNode {
         self.text = "REPLAY"
     }
     override func touchesEnded(touches: NSSet!, withEvent event: UIEvent!) {
-        Data.gameOver = false
+        Info.gameOver = false
     }
 }
+
