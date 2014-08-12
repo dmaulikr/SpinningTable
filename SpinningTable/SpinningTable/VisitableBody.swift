@@ -2,7 +2,7 @@
 //  VisitableBody.swift
 //  SpinningTable
 //
-//  Created by Sally Ouyang on 2014-08-06.
+//  Created by Sally Ouyang on 2014-08-11.
 //  Copyright (c) 2014 Sally Ouyang. All rights reserved.
 //
 
@@ -12,13 +12,13 @@ import SpriteKit
 class VisitableBody
 {
     let body:SKPhysicsBody
-    init(body:SKPhysicsBody)
+    init(touch:SKPhysicsBody)
     {
-        self.body = body
+        self.body = touch
     }
     
-    func acceptVisitor(visitor:ContactVisitor)
+    func acceptVisitor(contact:ContactVisitor)
     {
-        visitor.visitBody(body)
+        contact.touch(body)
     }
 }
