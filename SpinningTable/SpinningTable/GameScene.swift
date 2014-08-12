@@ -2,7 +2,7 @@
 //  GameScene.swift
 //  SpinningTable
 //
-//  Created by Sally Ouyang on 2014-08-06.
+//  Created by Sally Ouyang on 2014-08-11.
 //  Copyright (c) 2014 Sally Ouyang. All rights reserved.
 //
 
@@ -24,7 +24,7 @@ class GameScene: SKScene ,SKPhysicsContactDelegate{
         //bgImage.position = CGPointMake(self.size.width/2, self.size.height/2)
         //self.addChild(bgImage)
         player.position = map.points[player.posLine]
-        Data.display = display
+        Info.display = display
         self.physicsWorld.gravity = CGVectorMake(0, 0)
         self.physicsWorld.contactDelegate = self
         map.alpha = 0.8
@@ -51,6 +51,19 @@ class GameScene: SKScene ,SKPhysicsContactDelegate{
             {
                 newPosition()
                 player.runOnMap(map)
+            }
+        }
+    }
+    
+    func speedUp()
+    {
+        for stuff in self.children
+        {
+            if let object = stuff as? Object //downcasting
+            {
+                object.removeAllActions()
+                object.movingSpeed += CGFloat(Info.speedMultiple) * object.movingSpeed
+                object.runOnMap(map)
             }
         }
     }
@@ -82,7 +95,7 @@ class GameScene: SKScene ,SKPhysicsContactDelegate{
             
         }
         map.alpha = 0.8
-        Data.replay()
+        Info.replay()
         player.replay(map)
     }
     
@@ -93,7 +106,7 @@ class GameScene: SKScene ,SKPhysicsContactDelegate{
         player.posLine-=4
         player.removeAllActions()
         let next = map.points[player.posLine+1]
-        if !Data.gameOver
+        if !Info.gameOver
         {
             switch player.posLine%4
                 {
@@ -114,15 +127,15 @@ class GameScene: SKScene ,SKPhysicsContactDelegate{
     func generatePlayers(){
         self.runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.runBlock(
             {
-                if !Data.gameOver
+                if !Info.gameOver
                 {
                     let type = arc4random()%UInt32(6)
                     var random:AnyObject!
-                    if type == 0
+                    if type == 1
                     {
                         random = Life()
                     }
-                    else if type == 2 || type == 3
+                    else if type == 0 || type == 3
                     {
                         random = Food()
                     }
@@ -146,7 +159,7 @@ class GameScene: SKScene ,SKPhysicsContactDelegate{
     
     override func didSimulatePhysics()
     {
-        if Data.gameOver
+        if Info.gameOver
         {
             for node in self.children
             {
@@ -155,27 +168,14 @@ class GameScene: SKScene ,SKPhysicsContactDelegate{
         }
     }
     
-    func speedUp()
-    {
-        for stuff in self.children
-        {
-            if let object = stuff as? Object //downcasting
-            {
-                object.removeAllActions()
-                object.movingSpeed += CGFloat(Data.speedMultiple) * object.movingSpeed
-                object.runOnMap(map)
-            }
-        }
-    }
-    
     //SKPhysicsContactDelegate
     func didBeginContact(contact:SKPhysicsContact)
     {
-        let firstVisitor = ContactVisitor.contactVisitorWithBody(contact.bodyA, forContact: contact)
-        let secondVisitor = ContactVisitor.contactVisitorWithBody(contact.bodyB, forContact: contact)
+        let firstVisitor = ContactVisitor.touchBody(contact.bodyA, forContact: contact)
+        let secondVisitor = ContactVisitor.touchBody(contact.bodyB, forContact: contact)
         
-        let firstVisitableBody = VisitableBody(body: contact.bodyA)
-        let secondVisitableBody = VisitableBody(body: contact.bodyB)
+        let firstVisitableBody = VisitableBody(touch: contact.bodyA)
+        let secondVisitableBody = VisitableBody(touch: contact.bodyB)
         
         secondVisitableBody.acceptVisitor(firstVisitor)
         firstVisitableBody.acceptVisitor(secondVisitor)
