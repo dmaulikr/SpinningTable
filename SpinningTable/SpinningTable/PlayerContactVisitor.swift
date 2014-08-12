@@ -2,7 +2,7 @@
 //  PlayerContactVisitor.swift
 //  SpinningTable
 //
-//  Created by Sally Ouyang on 2014-08-06.
+//  Created by Sally Ouyang on 2014-08-11.
 //  Copyright (c) 2014 Sally Ouyang. All rights reserved.
 //
 
@@ -20,20 +20,20 @@ class PlayerContactVisitor:ContactVisitor
     {
         let first = self.body.node as Player
         let second = body.node
-        if Data.life == 1
+        if Info.life == 1
         {
             second.removeFromParent()
             first.life = false
-            Data.life = 0
+            Info.life = 0
         }
-        else if Data.life > 1
+        else if Info.life > 1
         {
             second.removeFromParent()
-            Data.life--
+            Info.life--
         }
         else
         {
-            Data.gameOver = true
+            Info.gameOver = true
         }
     }
     
@@ -42,7 +42,7 @@ class PlayerContactVisitor:ContactVisitor
         let first = self.body.node
         let second = body.node
         second.removeFromParent()
-        Data.score += 2
+        Info.score += 2
     }
     
     func visitLife(body:SKPhysicsBody)
@@ -51,7 +51,7 @@ class PlayerContactVisitor:ContactVisitor
         let second = body.node
         second.removeFromParent()
         first.life = true
-        Data.score++
-        Data.life++
+        Info.score++
+        Info.life++
     }
 }

@@ -2,12 +2,13 @@
 //  FoodContactVisitor.swift
 //  SpinningTable
 //
-//  Created by Sally Ouyang on 2014-08-06.
+//  Created by Sally Ouyang on 2014-08-11.
 //  Copyright (c) 2014 Sally Ouyang. All rights reserved.
 //
 
 import Foundation
 import SpriteKit
+//do nothing
 class FoodContactVisitor:ContactVisitor
 {
     func visitPlayer(body:SKPhysicsBody)
