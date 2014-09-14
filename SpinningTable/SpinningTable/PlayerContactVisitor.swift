@@ -19,7 +19,7 @@ class PlayerContactVisitor:ContactVisitor
     func visitShuriken(body:SKPhysicsBody)
     {
         let first = self.body.node as Player
-        let second = body.node
+        let second = body.node!
         if Info.life == 1
         {
             second.removeFromParent()
@@ -41,7 +41,7 @@ class PlayerContactVisitor:ContactVisitor
     {
         let first = self.body.node
         let second = body.node
-        second.removeFromParent()
+        second!.removeFromParent()
         Info.score += 2
     }
     
@@ -49,7 +49,7 @@ class PlayerContactVisitor:ContactVisitor
     {
         let first = self.body.node as Player
         let second = body.node
-        second.removeFromParent()
+        second!.removeFromParent()
         first.life = true
         Info.score++
         Info.life++

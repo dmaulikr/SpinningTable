@@ -13,7 +13,7 @@ class Food: Object
     convenience init()
     {
         self.init(name:"Food",image:"food")
-        self.physicsBody.categoryBitMask = foodCategory
+        self.physicsBody!.categoryBitMask = foodCategory
     }
 }
 

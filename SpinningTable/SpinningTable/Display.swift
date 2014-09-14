@@ -24,8 +24,10 @@ class Display: SKNode ,ShowInfo
     let gameOverLabel = SKLabelNode(text: "GAME OVER")
     let share = Share()
     let replayDisplay = Replay()
-    
-    init()
+    required init(coder: NSCoder) {
+        fatalError("NSCoding not supported")
+    }
+    override init()
     {
         super.init()
         scoreLabel.fontName = "Helvetica"
@@ -38,13 +40,13 @@ class Display: SKNode ,ShowInfo
     
     func setPosition()
     {
-        scoreLabel.position = CGPointMake(CGRectGetMidX(self.scene.frame), CGRectGetMaxY(self.scene.frame)/9)
-        bestScoreLabel.position = CGPointMake(CGRectGetMidX(self.scene.frame), CGRectGetMinY(self.scene.frame))
-        levelLabel.position = CGPointMake(CGRectGetMidX(self.scene.frame), 4*CGRectGetMaxY(self.scene.frame)/5)
-        lifeLabel.position = CGPointMake(CGRectGetMidX(self.scene.frame), CGRectGetMaxY(self.scene.frame)/5)
-        gameOverLabel.position = CGPointMake(CGRectGetMidX(self.scene.frame), CGRectGetMidY(self.scene.frame))
-        share.position = CGPointMake(CGRectGetMaxX(self.scene.frame)*3/4, CGRectGetMaxY(self.scene.frame)/3)
-        replayDisplay.position = CGPointMake(CGRectGetMaxX(self.scene.frame)/4, CGRectGetMaxY(self.scene.frame)/3)
+        scoreLabel.position = CGPointMake(CGRectGetMidX(self.scene!.frame), CGRectGetMaxY(self.scene!.frame)/9)
+        bestScoreLabel.position = CGPointMake(CGRectGetMidX(self.scene!.frame), CGRectGetMinY(self.scene!.frame))
+        levelLabel.position = CGPointMake(CGRectGetMidX(self.scene!.frame), 4*CGRectGetMaxY(self.scene!.frame)/5)
+        lifeLabel.position = CGPointMake(CGRectGetMidX(self.scene!.frame), CGRectGetMaxY(self.scene!.frame)/5)
+        gameOverLabel.position = CGPointMake(CGRectGetMidX(self.scene!.frame), CGRectGetMidY(self.scene!.frame))
+        share.position = CGPointMake(CGRectGetMaxX(self.scene!.frame)*3/4, CGRectGetMaxY(self.scene!.frame)/3)
+        replayDisplay.position = CGPointMake(CGRectGetMaxX(self.scene!.frame)/4, CGRectGetMaxY(self.scene!.frame)/3)
     }
     
     func updateInfo()

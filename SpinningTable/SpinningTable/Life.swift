@@ -13,6 +13,6 @@ class Life: Object
     convenience init()
     {
         self.init(name:"Life",image:"life")
-        self.physicsBody.categoryBitMask = lifeCategory
+        self.physicsBody!.categoryBitMask = lifeCategory
     }
 }

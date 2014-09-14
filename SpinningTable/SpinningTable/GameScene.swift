@@ -12,7 +12,7 @@ class GameScene: SKScene ,SKPhysicsContactDelegate{
     var player:Player
     let map:Map
     let display:Display
-    init(size:CGSize)
+    override init(size:CGSize)
     {
         let center = CGPointMake(size.width/2, size.height/2)
         player = Player()
@@ -35,6 +35,10 @@ class GameScene: SKScene ,SKPhysicsContactDelegate{
         player.runOnMap(map)
         generatePlayers()
         
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func didMoveToView(view: SKView)
@@ -166,6 +170,28 @@ class GameScene: SKScene ,SKPhysicsContactDelegate{
                 (node as SKNode).removeAllActions()
             }
         }
+    }
+    
+    func viewToImage(view:UIView)->UIImage
+    {
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, true, 0.0);
+        view.drawViewHierarchyInRect(view.bounds,afterScreenUpdates:true)
+        let screenShot = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext(); //clean up
+        return screenShot;
+    }
+    
+    //grabbing a node into UIImage
+    func nodeToImage(node:SKNode)->UIImage
+    {
+        let tex = self.scene!.view!.textureFromNode(node)
+        let view  = SKView(frame: CGRectMake(0, 0, tex.size().width, tex.size().height))
+        let scene = SKScene(size: tex.size())
+        let frame  = SKSpriteNode(texture: tex)
+        frame.position = CGPointMake(CGRectGetMidX(view.frame), CGRectGetMidY(view.frame));
+        scene.addChild(frame)
+        view.presentScene(scene)
+        return self.viewToImage(view)
     }
     
     //SKPhysicsContactDelegate

@@ -31,7 +31,7 @@ class Player: Object
     convenience init()
     {
         self.init(name:"Player",image:"normal")
-        self.physicsBody.categoryBitMask = playerCategory
+        self.physicsBody!.categoryBitMask = playerCategory
         self.movingSpeed = 70
         self.posLine = 3
     }

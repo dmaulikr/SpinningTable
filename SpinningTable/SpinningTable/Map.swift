@@ -12,7 +12,7 @@ class Map: SKShapeNode
 {
     let spaces:CGFloat = 35
     var points:[CGPoint] = []
-    convenience init(origin:CGPoint,layer:CGFloat)
+    convenience init(origin:CGPoint,layer:Int)
     {
         var x:CGFloat = origin.x
         var y:CGFloat = origin.y
@@ -22,21 +22,22 @@ class Map: SKShapeNode
         points.append(CGPointMake(x, y))
         for index in 1..<layer
         {
-            y-=spaces*(2*index-1)
+            y-=spaces*(2*CGFloat(index)-1)
             CGPathAddLineToPoint(line, nil , x, y)
             points.append(CGPointMake(x, y))
             
-            x-=spaces*(2*index-1)
+            x-=spaces*(2*CGFloat(index)-1)
             CGPathAddLineToPoint(line, nil , x, y)
             points.append(CGPointMake(x, y))
             
-            y+=spaces*2*index
+            y+=spaces*2*CGFloat(index)
             CGPathAddLineToPoint(line, nil , x, y)
             points.append(CGPointMake(x, y))
             
-            x+=spaces*2*index
+            x+=spaces*2*CGFloat(index)
             CGPathAddLineToPoint(line, nil , x, y)
             points.append(CGPointMake(x, y))
+
         }
         var bgImage = SKSpriteNode(imageNamed: "bg.png")
         self.addChild(bgImage)

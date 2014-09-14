@@ -16,17 +16,19 @@ class Object: SKSpriteNode
     let circle:CGFloat = 10
     var movingSpeed:CGFloat = 50
     var posLine = 0
-    
+    required init(coder: NSCoder) {
+        fatalError("NSCoding not supported")
+    }
     init(name:String,image:String)
     {
         super.init(texture: SKTexture(imageNamed: image),color:SKColor.clearColor(), size: CGSizeMake(circle*2, circle*2))
         self.physicsBody = SKPhysicsBody(circleOfRadius: circle)
-        self.physicsBody.usesPreciseCollisionDetection = true
-        self.physicsBody.collisionBitMask = 0
-        self.physicsBody.contactTestBitMask = playerCategory|shurikenCategory|foodCategory
+        self.physicsBody!.usesPreciseCollisionDetection = true
+        self.physicsBody!.collisionBitMask = 0
+        self.physicsBody!.contactTestBitMask = playerCategory|shurikenCategory|foodCategory
         movingSpeed += CGFloat(Info.speedMultiple) * self.movingSpeed
         self.name = name
-        self.physicsBody.angularDamping = 0
+        self.physicsBody!.angularDamping = 0
     }
     
     func runOnMap(map:Map)

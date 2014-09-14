@@ -13,6 +13,6 @@ class Shuriken: Object
     convenience init()
     {
         self.init(name:"Shuriken",image:"shuriken")
-        self.physicsBody.categoryBitMask = shurikenCategory
+        self.physicsBody!.categoryBitMask = shurikenCategory
     }
 }

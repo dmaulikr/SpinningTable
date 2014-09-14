@@ -43,7 +43,7 @@ class ContactVisitor:NSObject
     //second part of the double dispatch by sending a message named after the second physics body in the contact to the newly constructed ContactVisitor subclass instance which is named after the first body in the contact
     func touch(visitor:SKPhysicsBody)
     {
-        var visit = "visit" + visitor.node.name + ":"
+        var visit = "visit" + visitor.node!.name! + ":"
         let string1 = NSSelectorFromString(visit)
         if self.respondsToSelector(string1)
         {
